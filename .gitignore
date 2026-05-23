@@ -1,0 +1,78 @@
+# ── Python ──────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ── Virtual environments ─────────────────────────────────────────────────────
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# ── Jupyter Notebooks ────────────────────────────────────────────────────────
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+
+# ── IDE / editor artefacts ───────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ── Project-specific: generated data (large, reproducible) ──────────────────
+data/raw/transcripts/*.txt
+data/processed/*.csv
+data/processed/*.pkl
+
+# ── Project-specific: generated outputs ─────────────────────────────────────
+outputs/*.png
+outputs/*.jpg
+outputs/*.csv
+outputs/*.html
+
+# ── Secrets / credentials ───────────────────────────────────────────────────
+.env
+*.env
+secrets.yaml
+credentials.json
+
+# ── Test artefacts ───────────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+*.cover
+*.log
+
+# ── NOTE: Do NOT ignore reference files ──────────────────────────────────────
+# data/reference/company_universe.csv  ← keep tracked
+# data/reference/stopwords_finance.txt ← keep tracked
+# data/raw/transcripts/.gitkeep        ← keep tracked
+# data/processed/.gitkeep              ← keep tracked
+# outputs/.gitkeep                     ← keep tracked

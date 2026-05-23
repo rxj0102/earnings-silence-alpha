@@ -1,0 +1,195 @@
+# Financial earnings call stopwords
+# One term per line. Lines beginning with # are comments.
+# Loaded by src/text_processor.py::load_finance_stopwords()
+
+# ── Standard English function words ────────────────────────────────────────
+the
+and
+of
+to
+in
+a
+is
+that
+for
+on
+are
+with
+as
+this
+be
+it
+by
+an
+we
+at
+from
+or
+have
+our
+was
+has
+not
+but
+will
+can
+were
+been
+its
+more
+their
+all
+would
+so
+about
+up
+out
+which
+into
+also
+if
+there
+one
+when
+than
+us
+do
+your
+any
+how
+what
+these
+those
+some
+other
+had
+may
+my
+he
+she
+they
+his
+her
+them
+
+# ── Earnings call boilerplate ───────────────────────────────────────────────
+thank you
+good morning
+good afternoon
+good evening
+operator
+next question
+please go ahead
+your line is open
+one moment
+conference call
+earnings call
+welcome to
+ladies and gentlemen
+thank you for joining
+thank you for participating
+thank you for standing by
+we appreciate your
+please hold
+you may proceed
+caller your line is open
+the next question comes from
+please state your question
+this concludes
+this does conclude
+on behalf of
+with us today
+joining us today
+turning to
+turning now
+let me turn the call
+i will now turn
+i would now like to turn
+please welcome
+prepared remarks
+opening remarks
+closing remarks
+before i begin
+before we begin
+
+# ── Financial filler phrases ────────────────────────────────────────────────
+per share
+basis points
+year over year
+quarter over quarter
+year-over-year
+quarter-over-quarter
+as previously disclosed
+going forward
+at this time
+i would like to
+i'd like to
+we would like to
+we'd like to
+as you know
+as we have noted
+as we noted
+on a reported basis
+on an adjusted basis
+on a constant currency basis
+constant currency
+as compared to
+compared to the prior
+compared to the same period
+the prior year period
+the prior year quarter
+the year ago period
+the year ago quarter
+in line with
+in line with our expectations
+ahead of our expectations
+ahead of expectations
+we are pleased to report
+we are pleased
+we're pleased
+pleased to announce
+pleased to report
+i am pleased
+we remain confident
+we continue to
+we continued to
+we will continue
+continue to focus
+focus on delivering
+delivering value
+creating value
+driving growth
+achieving our goals
+our guidance
+our full year guidance
+full year outlook
+our outlook
+long-term value
+long-term growth
+
+# ── Legal / safe harbor boilerplate ────────────────────────────────────────
+forward looking statements
+forward-looking statements
+safe harbor
+risk factors
+actual results may differ
+materially from those
+those anticipated
+those projected
+non-gaap
+gaap
+reconciliation
+sec filings
+form 10-k
+form 10-q
+annual report
+quarterly report
+filings with the sec
+cautionary statements
+cautionary note
+certain risks
+certain uncertainties
+you should not place undue reliance
+undue reliance
+filed with the securities
+securities and exchange commission
