@@ -319,18 +319,14 @@ def classify_omission_regime(signal_df: pd.DataFrame) -> pd.DataFrame:
     """
     signal_df = signal_df.copy()
 
-    def _decile_rank(group: pd.DataFrame) -> pd.Series:
-        return pd.qcut(
-            group["omission_score"],
-            q=10,
-            labels=False,
-            duplicates="drop",
-        ).add(1)  # 1-indexed
+    def _decile_rank(scores: pd.Series) -> pd.Series:
+        return pd.qcut(scores, q=10, labels=False, duplicates="drop") + 1  # 1-indexed
 
-    # Cross-sectional decile by quarter-year
-    signal_df["omission_decile"] = signal_df.groupby(["year", "quarter"], group_keys=False).apply(
-        _decile_rank
-    )
+    # Cross-sectional decile by quarter-year (transform works for any number of groups,
+    # including a single one, where groupby.apply would return a wide frame)
+    signal_df["omission_decile"] = signal_df.groupby(["year", "quarter"])[
+        "omission_score"
+    ].transform(_decile_rank)
 
     # Handle cases where qcut fails (too few companies in a quarter)
     signal_df["omission_decile"] = signal_df["omission_decile"].fillna(5).astype(int)
