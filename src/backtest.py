@@ -114,7 +114,9 @@ def run_long_short_backtest(signal_df: pd.DataFrame) -> pd.DataFrame:
             }
         )
 
-    results_df = pd.DataFrame(rows).sort_values(["year", "quarter"]).reset_index(drop=True)
+    cols = ["year", "quarter", "long_ret", "short_ret", "ls_ret", "n_long", "n_short"]
+    results_df = pd.DataFrame(rows, columns=cols)
+    results_df = results_df.sort_values(["year", "quarter"]).reset_index(drop=True)
     logger.info(
         "Backtest complete: %d periods, mean LS return = %.4f",
         len(results_df),

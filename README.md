@@ -251,3 +251,7 @@ jupyter notebook notebooks/01_exploratory_analysis.ipynb
 ## Disclaimer
 
 This repository is academic research only. All code, analyses, and results are provided for educational and research purposes. Nothing in this repository constitutes investment advice. Past performance (whether backtested or real) does not guarantee future results. The author(s) have no fiduciary relationship with the reader.
+
+## Known limitations
+
+- **TF-IDF is fit on the whole corpus.** The per-company baseline vocabulary correctly uses only the trailing quarters, but the IDF weights come from a vectoriser fitted on every transcript, including ones after the signal date. Fitting IDF on an expanding window (or per quarter) removes this mild look-ahead.

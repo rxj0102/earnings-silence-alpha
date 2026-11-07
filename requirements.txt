@@ -31,3 +31,6 @@ tqdm>=4.66.0
 
 # ── Serialisation (Python ≥ 3.8 ships pickle; pickle5 for backports) ─────────
 pickle5>=0.0.12; python_version < "3.8"
+
+# Testing
+pytest>=7.0
