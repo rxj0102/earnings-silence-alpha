@@ -1,5 +1,7 @@
 # Earnings Call Silence Mapping via Transcript Topic Omission
 
+[![CI](https://github.com/rxj0102/earnings-silence-alpha/actions/workflows/ci.yml/badge.svg)](https://github.com/rxj0102/earnings-silence-alpha/actions/workflows/ci.yml)
+
 > **Academic Research** | Python · NLP · Quant Finance | Not Investment Advice
 
 ---
@@ -212,15 +214,7 @@ jupyter notebook notebooks/01_exploratory_analysis.ipynb
 
 ## Key Findings
 
-*[Placeholder — populate after running the full pipeline on live EDGAR data.]*
-
-| Metric | Value |
-|---|---|
-| 30-Day IC (Spearman) | TBD |
-| t-stat (HIGH vs LOW, 30d) | TBD |
-| Annualised Sharpe (L/S) | TBD |
-| Max Drawdown | TBD |
-| Sector-Neutral Sharpe | TBD |
+**Status:** no results are published yet. They depend on live data that was not available when this repository was last updated. Run the full pipeline on live EDGAR data to generate them. Results will be added here only from that run.
 
 ---
 
