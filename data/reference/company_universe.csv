@@ -1,0 +1,21 @@
+ticker,company_name,sector,cik
+AAPL,Apple Inc.,Technology,320193
+MSFT,Microsoft Corporation,Technology,789019
+NVDA,NVIDIA Corporation,Technology,1045810
+GOOGL,Alphabet Inc.,Technology,1652044
+META,Meta Platforms Inc.,Technology,1326801
+CRM,Salesforce Inc.,Technology,1108524
+JNJ,Johnson & Johnson,Healthcare,200406
+UNH,UnitedHealth Group Incorporated,Healthcare,72971
+PFE,Pfizer Inc.,Healthcare,78003
+ABT,Abbott Laboratories,Healthcare,1800
+HON,Honeywell International Inc.,Industrials,773840
+UPS,United Parcel Service Inc.,Industrials,1090727
+GE,GE Aerospace,Industrials,40533
+JPM,JPMorgan Chase & Co.,Financials,19617
+BAC,Bank of America Corporation,Financials,70858
+GS,The Goldman Sachs Group Inc.,Financials,886982
+HD,The Home Depot Inc.,Consumer Discretionary,354950
+KO,The Coca-Cola Company,Consumer Staples,21344
+XOM,Exxon Mobil Corporation,Energy,34088
+CVX,Chevron Corporation,Energy,93410
