@@ -76,3 +76,6 @@ htmlcov/
 # data/raw/transcripts/.gitkeep        ← keep tracked
 # data/processed/.gitkeep              ← keep tracked
 # outputs/.gitkeep                     ← keep tracked
+
+.venv/
+data/raw/edgar_cache/
