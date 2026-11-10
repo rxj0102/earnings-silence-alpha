@@ -78,3 +78,4 @@ htmlcov/
 # outputs/.gitkeep                     ← keep tracked
 
 .venv/
+data/raw/edgar_cache/
