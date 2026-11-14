@@ -214,7 +214,33 @@ jupyter notebook notebooks/01_exploratory_analysis.ipynb
 
 ## Key Findings
 
-**Status:** no results are published yet. They depend on live data that was not available when this repository was last updated. Run the full pipeline on live EDGAR data to generate them. Results will be added here only from that run.
+No return results are reported, because the data source does not contain the input the signal needs. Measured with `scripts/transcript_availability.py` (output: `results/transcript_availability.csv`).
+
+| Measure | Value |
+|---|---|
+| Companies in `data/reference/company_universe.csv` | 20 |
+| Earnings 8-K filings (Item 2.02), 2015 to 2023 | 754 |
+| Best EX-99 exhibit is an earnings press release | 613 |
+| No EX-99 exhibit | 136 |
+| Exhibit too short to classify (under 500 words) | 3 |
+| Exhibit classified as a call transcript | 2 (both XOM, filed in March 2015 and March 2016, outside earnings season, so most likely investor-day material rather than earnings calls) |
+
+An EDGAR full-text search for 8-K documents from these companies containing both question-and-answer session and operator, 2015 to 2023, returned 1 hit (3 of the 20 company searches returned server errors).
+
+Implication: large US companies file the earnings press release on Form 8-K, not the call transcript, so `src/transcript_scraper.py` finds no prepared remarks to measure omissions in. The press release is a different document (scripted, numbers-heavy), so running the omission detector on it would test a different hypothesis. A real test needs a transcript source; free options are limited and their terms of use should be checked before scraping.
+
+This review also fixed two CIKs in `data/reference/company_universe.csv`: UNH was listed as 72971 (now 731766) and GE as 40533 (now 40545).
+
+### Signal documentation
+
+| Field | Value |
+|---|---|
+| Signal | Topic omission score relative to the company's own historical baseline (TF-IDF topic coverage of prepared remarks) |
+| Expected sign | Negative: high omission predicts lower 30-day post-earnings returns |
+| Inputs | Earnings call transcripts (intended source: EDGAR 8-K exhibits), daily prices (yfinance) |
+| Timing | Signal at the call date, 30-day holding window |
+| Code | `src/transcript_scraper.py`, `src/tfidf_engine.py`, `src/omission_detector.py`, `src/signal.py`, `src/backtest.py` |
+| Status | Not run: EDGAR has transcripts for 2 of 754 earnings 8-Ks in this universe |
 
 ---
 
@@ -231,6 +257,36 @@ jupyter notebook notebooks/01_exploratory_analysis.ipynb
 5. **Multiple comparison problem**: Testing three return horizons (1d, 5d, 30d) inflates the Type I error rate. Apply Bonferroni correction (α/3 ≈ 0.017) when assessing p-values. The 30-day horizon is the pre-specified primary test; the others are exploratory.
 
 ---
+
+## Reproducibility
+
+### Data availability
+
+All inputs come from free, public sources. No paid data or API keys are required unless noted.
+
+- Yahoo Finance via the yfinance package (free, no key)
+- SEC EDGAR filings (free, requires a User-Agent header)
+- Files shipped in the `data/` folder of this repository
+
+### Computational requirements
+
+- Python 3.12.3. Every dependency version is pinned in `uv.lock`.
+- Checked on Linux x86_64 with 2 CPU cores and 8 GB RAM. No GPU is needed.
+
+```bash
+pip install uv     # once
+uv sync            # installs the exact pinned environment
+uv run pytest -q   # runs the test suite
+```
+
+### Runtime
+
+The test suite (11 tests) finishes in about 10 seconds on the machine above, including any data downloads it triggers.
+
+### Citation
+
+Citation metadata is in `CITATION.cff`. GitHub turns it into a Cite this repository button on the repo page.
+
 
 ## Academic References
 
