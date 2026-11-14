@@ -8,11 +8,11 @@
 
 ## Abstract
 
-Earnings calls are one of the most information-dense events in the corporate calendar. The finance literature has largely focused on *what* management says — sentiment, readability, tone, and keyword frequency. This project takes the opposite approach: it maps **what management does not say** relative to their own historical baseline.
+Earnings calls are one of the most information-dense events in the corporate calendar. The finance literature has largely focused on *what* management says; sentiment, readability, tone, and keyword frequency. This project takes the opposite approach: it maps **what management does not say** relative to their own historical baseline.
 
-The behavioural finance motivation is straightforward: when a CEO who has discussed "supply chain optimisation" in every single quarterly call for two years suddenly omits the phrase entirely, the silence is more informative than any positive spin could be. Topic omissions in prepared remarks — the carefully scripted, legally reviewed portion of the call — are deliberate editorial choices. They are the dog that didn't bark. This repository implements a systematic, data-driven framework to detect and trade on those silences.
+The behavioural finance motivation is straightforward: when a CEO who has discussed *supply chain optimisation* in every single quarterly call for two years suddenly omits the phrase entirely, the silence is more informative than any positive spin could be. Topic omissions in prepared remarks (the carefully scripted, legally reviewed portion of the call) are deliberate editorial choices. They are the dog that didn't bark. This repository implements a systematic, data-driven framework to detect and trade on those silences.
 
-The methodological contribution is a company-specific, history-relative topic omission score built from TF-IDF representations of SEC 8-K filings. For each company, we construct a *standard vocabulary* — the top TF-IDF-weighted bigrams and trigrams over the trailing four quarters — and flag any term that drops below 20% of its historical average weight in the current quarter as an *omission event*. The omission score aggregates severity across all flagged terms, with additional weight for terms that appeared in every prior quarter (*core vocabulary*). We validate the signal against 30-day post-earnings stock returns across a 20-company universe using t-tests, Spearman rank IC, OLS regression with fixed effects, and a long-short backtest.
+The methodological contribution is a company-specific, history-relative topic omission score built from TF-IDF representations of SEC 8-K filings. For each company, we construct a *standard vocabulary*, the top TF-IDF-weighted bigrams and trigrams over the trailing four quarters, and flag any term that drops below 20% of its historical average weight in the current quarter as an *omission event*. The omission score aggregates severity across all flagged terms, with additional weight for terms that appeared in every prior quarter (*core vocabulary*). We validate the signal against 30-day post-earnings stock returns across a 20-company universe using t-tests, Spearman rank IC, OLS regression with fixed effects, and a long-short backtest.
 
 ---
 
@@ -35,7 +35,7 @@ The methodological contribution is a company-specific, history-relative topic om
 | Readability scores (Fog, Flesch) | Linguistic complexity of disclosure |
 | **Omission Mapping (this repo)** | **Structural *absence* of topics vs. company's own baseline** |
 
-We do not score tone or language. We score the structural absence of topics relative to a company's own historical baseline. A company can say nothing negative and still have a high omission score — precisely because it said nothing. This is the key distinction.
+We do not score tone or language. We score the structural absence of topics relative to a company's own historical baseline. A company can say nothing negative and still have a high omission score: precisely because it said nothing. This is the key distinction.
 
 ---
 
@@ -104,7 +104,7 @@ $$\text{Severity}_i = (1 - \text{presence\_ratio}_i) \times \overline{\text{TF-I
 where:
 $$m_i = \begin{cases} 1.5 & \text{if term } i \text{ appeared in all 4 trailing quarters (core vocab)} \\ 1.0 & \text{otherwise} \end{cases}$$
 
-**Intuition**: the severity score rewards three dimensions simultaneously — how completely absent the term is (1 − presence\_ratio), how important the term was historically (avg TF-IDF weight), and whether it was a regular fixture of the company's communication (core vocab multiplier).
+**Intuition**: the severity score rewards three dimensions simultaneously; how completely absent the term is (1 − presence\_ratio), how important the term was historically (avg TF-IDF weight), and whether it was a regular fixture of the company's communication (core vocab multiplier).
 
 ---
 
@@ -248,11 +248,11 @@ This review also fixed two CIKs in `data/reference/company_universe.csv`: UNH wa
 
 1. **EDGAR coverage gaps**: Not all 8-K filings contain full earnings call transcripts. Many companies file only the press release or a summary. The `coverage_quality` column filters to documents >2000 words, but coverage varies significantly by company and year.
 
-2. **Section detection failure rate**: Splitting prepared remarks from Q&A relies on heuristic pattern matching. For filings without clear section headers, the full text is used — diluting the signal by including analyst questions that may re-introduce omitted topics.
+2. **Section detection failure rate**: Splitting prepared remarks from Q&A relies on heuristic pattern matching. For filings without clear section headers, the full text is used; diluting the signal by including analyst questions that may re-introduce omitted topics.
 
-3. **Look-ahead bias risk**: Standard vocabulary construction uses a strictly trailing window (t-1 through t-4). No future information enters the baseline. However, the TF-IDF vectoriser is fit on the *full* corpus including future quarters — a mild look-ahead bias in IDF weights. A production system would need rolling vectoriser refitting.
+3. **Look-ahead bias risk**: Standard vocabulary construction uses a strictly trailing window (t-1 through t-4). No future information enters the baseline. However, the TF-IDF vectoriser is fit on the *full* corpus including future quarters; a mild look-ahead bias in IDF weights. A production system would need rolling vectoriser refitting.
 
-4. **Survivorship bias**: The 20-company universe consists of current S&P 500 constituents. Companies that were delisted, merged, or experienced financial distress are excluded — biasing the universe toward survivors with stable disclosure patterns.
+4. **Survivorship bias**: The 20-company universe consists of current S&P 500 constituents. Companies that were delisted, merged, or experienced financial distress are excluded; biasing the universe toward survivors with stable disclosure patterns.
 
 5. **Multiple comparison problem**: Testing three return horizons (1d, 5d, 30d) inflates the Type I error rate. Apply Bonferroni correction (α/3 ≈ 0.017) when assessing p-values. The 30-day horizon is the pre-specified primary test; the others are exploratory.
 
